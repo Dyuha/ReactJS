@@ -1,8 +1,9 @@
 import React from "react";
+import cls from"./Profile.module.css";
 
 const Profile = () => {
     return (
-        <main className='content'>
+        <main className={cls.content}>
         <div>
           <img src="https://static1.cbrimages.com/wordpress/wp-content/uploads/2021/09/Looney-Tunes-64-Super-Daffy-Duck-Header.jpg" alt="main_img" />
         </div>

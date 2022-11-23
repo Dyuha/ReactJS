@@ -1,0 +1,10 @@
+.navbar {
+  grid-area: n;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(128, 10, 238);
+}
+
+.item {
+  color: aliceblue;
+}
