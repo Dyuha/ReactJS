@@ -4,7 +4,7 @@ import cls from "./Profile.module.css";
 
 const Profile = () => {
   return (
-    <main className={cls.content}>
+    <main>
       <div>
         <img
           className={cls.main_logo}

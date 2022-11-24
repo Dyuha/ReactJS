@@ -1,7 +1,7 @@
 import React from "react";
 import cls from "./Post.module.css";
 
-const Post = () => {
+const Post = (props) => {
   return (
     <div>
       <div className={cls.wrapper}>
@@ -12,10 +12,10 @@ const Post = () => {
             alt="avatar"
           />
         </div>
-        <div className={cls.item}>post 1</div>
+        <div className={cls.item}>{props.message || "Post..."}</div>
       </div>
-      <span>like </span>
-      <span>dislike</span>
+      <span>likes: {props.likes || 0}</span>
+      <span> dislikes: {props.dislikes || 0}</span>
     </div>
   );
 };
