@@ -12,6 +12,7 @@ const ProfileInfo = () => {
         />
       </div>
       <div className={cls.description}>ava + descriprion</div>
+      
     </div>
   );
 };
