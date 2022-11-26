@@ -4,15 +4,15 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 
 const App = (props) => {
-  const dialogs = props.dialog;
-  const messages = props.message;
-  const posts = props.post;
+  const dialogs = props.states.messagesPage.dialogsData;
+  const messages = props.states.messagesPage.messagesData;
+  const posts = props.states.profilePage.postsData;
   return (
     <Router>
       <div className="app-wrapper">
