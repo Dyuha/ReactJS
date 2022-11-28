@@ -13,6 +13,7 @@ const App = (props) => {
   const dialogs = props.states.messagesPage.dialogsData;
   const messages = props.states.messagesPage.messagesData;
   const posts = props.states.profilePage.postsData;
+  const postText = props.states.profilePage.newPostText;
   return (
     <Router>
       <div className="app-wrapper">
@@ -22,7 +23,8 @@ const App = (props) => {
           <Routes>
             <Route path="" element={<Navigate to="/profile" />}/>
             <Route path="/dialogs/*" element={<Dialogs dialogs={dialogs} messages={messages}/>}/>
-            <Route path="/profile" element={<Profile posts={posts}/>}/>
+            <Route path="/profile" element={<Profile posts={posts} postText={postText} 
+              updateNewPostText={props.updateNewPostText} addPost={props.addPost}/>}/>
             <Route path="/news" element={<News />}/>
             <Route path="/music" element={<Music />}/>
             <Route path="/settings" element={<Settings />}/>
