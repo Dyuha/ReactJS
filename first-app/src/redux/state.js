@@ -1,4 +1,8 @@
-import { rerenderEntireTree } from "../render";
+// import { rerenderEntireTree } from "../index";
+let rerenderEntireTree = () => {
+  alert('State has been chenched')
+}
+
 
 const state = {
   profilePage: {
@@ -40,6 +44,8 @@ const state = {
   },
 };
 
+window.state = state;
+
 export const addPost = () => {
   const newPost = {
     id: 8,
@@ -54,9 +60,11 @@ export const addPost = () => {
 
 export const updateNewPostText = (postMessage) => {
   state.profilePage.newPostText = postMessage;
-  rerenderEntireTree(state);
+  rerenderEntireTree(state)
 }
 
-
+export const subscribe = (observer) => {
+  rerenderEntireTree = observer;         // наблюдатель observer
+}
 
 export default state;
