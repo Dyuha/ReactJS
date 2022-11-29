@@ -9,11 +9,11 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 
-const App = (props) => {
-  const dialogs = props.states.messagesPage.dialogsData;
-  const messages = props.states.messagesPage.messagesData;
-  const posts = props.states.profilePage.postsData;
-  const postText = props.states.profilePage.newPostText;
+const App = ({states, dispatch}) => {
+  const dialogs = states.messagesPage.dialogsData;
+  const messages = states.messagesPage.messagesData;
+  const posts = states.profilePage.postsData;
+  const postText = states.profilePage.newPostText;
   return (
     <Router>
       <div className="app-wrapper">
@@ -24,7 +24,7 @@ const App = (props) => {
             <Route path="" element={<Navigate to="/profile" />}/>
             <Route path="/dialogs/*" element={<Dialogs dialogs={dialogs} messages={messages}/>}/>
             <Route path="/profile" element={<Profile posts={posts} postText={postText} 
-              updateNewPostText={props.updateNewPostText} addPost={props.addPost}/>}/>
+              dispatch={dispatch}/>}/>
             <Route path="/news" element={<News />}/>
             <Route path="/music" element={<Music />}/>
             <Route path="/settings" element={<Settings />}/>

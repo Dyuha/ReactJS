@@ -5,8 +5,6 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import store from "./redux/state";
 
-
-// addPost('addPost');
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 //костыли (пока что) ререндерим полностью наше дерево с новым state
@@ -14,10 +12,13 @@ export const rerenderEntireTree = () => {
   root.render(
     <React.StrictMode>
       {/* <App dialogs={state.dialogsData} messages={state.messagesData} posts={state.postData} /> */}
-      <App states={store.getState()} addPost={store.addPost.bind(store)} updateNewPostText={store.updateNewPostText.bind(store)}/>
+      <App
+        states={store.getState()}
+        dispatch={store.dispatch.bind(store)}
+      />
     </React.StrictMode>
   );
-}
+};
 
 rerenderEntireTree(store.getState());
 store.subscribe(rerenderEntireTree);

@@ -1,5 +1,5 @@
 let store = {
-  _state : {
+  _state: {
     profilePage: {
       postsData: [
         { id: 1, message: "My first post!", likes: 12, dislikes: 1 },
@@ -15,7 +15,7 @@ let store = {
         { id: 6, message: "Kak dela?" },
         { id: 7, message: "Kak dela?" },
       ],
-      newPostText: 'Some Post Text!!!',
+      newPostText: "Some Post Text!!!",
     },
     messagesPage: {
       dialogsData: [
@@ -38,31 +38,48 @@ let store = {
       ],
     },
   },
+  _callSubscriber() {
+    alert("State has been chenched");
+  },
   getState() {
     return this._state;
   },
-  _callSubscriber() {
-    alert('State has been chenched')
-  },
-  addPost() {
-    const newPost = {
-      id: 8,
-      message: this._state.profilePage.newPostText,
-      likes: 3,
-      dislikes: 11,
-    };
-    this._state.profilePage.postsData.push(newPost);
-    this._state.profilePage.newPostText = '';
-    this._callSubscriber(this._state);
-  },
-  updateNewPostText(postMessage) {
-    this._state.profilePage.newPostText = postMessage;
-    this._callSubscriber(this._state)
-  },
   subscribe(observer) {
-    this._callSubscriber = observer;         // наблюдатель observer
+    this._callSubscriber = observer; // наблюдатель observer
   },
-}
+  // addPost() {
+  //   const newPost = {
+  //     id: 8,
+  //     message: this._state.profilePage.newPostText,
+  //     likes: 3,
+  //     dislikes: 11,
+  //   };
+  //   this._state.profilePage.postsData.push(newPost);
+  //   this._state.profilePage.newPostText = "";
+  //   this._callSubscriber(this._state);
+  // },
+  // updateNewPostText(postMessage) {
+  //   this._state.profilePage.newPostText = postMessage;
+  //   this._callSubscriber(this._state);
+  // },
+  dispatch(action) { // action - объект { type: 'ADD-POST', message: 'new message', ... }
+    debugger;
+    if (action.type === 'ADD-POST'){
+      const newPost = {
+        id: 8,
+        message: this._state.profilePage.newPostText,
+        likes: 3,
+        dislikes: 11,
+      };
+      this._state.profilePage.postsData.push(newPost);
+      this._state.profilePage.newPostText = "";
+      this._callSubscriber(this._state);
+    } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+      this._state.profilePage.newPostText = action.postMessage;
+      this._callSubscriber(this._state);
+    }
+  },
+};
 
 window.store = store;
 
