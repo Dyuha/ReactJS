@@ -14,6 +14,7 @@ const App = ({states, dispatch}) => {
   const messages = states.messagesPage.messagesData;
   const posts = states.profilePage.postsData;
   const postText = states.profilePage.newPostText;
+  const newMessageText = states.messagesPage.newMessageText;
   return (
     <Router>
       <div className="app-wrapper">
@@ -22,7 +23,10 @@ const App = ({states, dispatch}) => {
         <div className="app-wrapper-content">
           <Routes>
             <Route path="" element={<Navigate to="/profile" />}/>
-            <Route path="/dialogs/*" element={<Dialogs dialogs={dialogs} messages={messages}/>}/>
+            <Route path="/dialogs/*" element={<Dialogs dialogs={dialogs} 
+              messages={messages} 
+              newMessageText={newMessageText}
+              dispatch={dispatch}/>}/>
             <Route path="/profile" element={<Profile posts={posts} postText={postText} 
               dispatch={dispatch}/>}/>
             <Route path="/news" element={<News />}/>
