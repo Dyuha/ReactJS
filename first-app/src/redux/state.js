@@ -47,21 +47,26 @@ let store = {
   subscribe(observer) {
     this._callSubscriber = observer; // наблюдатель observer
   },
+  _addPost() {
+    const newPost = {
+      id: 8,
+      message: this._state.profilePage.newPostText,
+      likes: 3,
+      dislikes: 11,
+    };
+    this._state.profilePage.postsData.push(newPost);
+    this._state.profilePage.newPostText = "";
+    this._callSubscriber(this._state);
+  },
+  _updateNewPostText(postMessage) {
+    this._state.profilePage.newPostText = postMessage;
+    this._callSubscriber(this._state);
+  },
   dispatch(action) { // action - объект { type: 'ADD-POST', message: 'new message', ... }
-    debugger;
-    if (action.type === 'ADD-POST'){
-      const newPost = {
-        id: 8,
-        message: this._state.profilePage.newPostText,
-        likes: 3,
-        dislikes: 11,
-      };
-      this._state.profilePage.postsData.push(newPost);
-      this._state.profilePage.newPostText = "";
-      this._callSubscriber(this._state);
-    } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-      this._state.profilePage.newPostText = action.postMessage;
-      this._callSubscriber(this._state);
+    if (action.type === "ADD-POST") {
+      this._addPost();
+    } else if (action.type === "UPDATE-NEW-POST-TEXT") {
+      this._updateNewPostText(action.postMessage);
     }
   },
 };
