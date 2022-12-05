@@ -3,12 +3,12 @@ import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import cls from "./Profile.module.css";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
-const Profile = ({store}) => {
+const Profile = () => {
   return (
     <main>
       <ProfileInfo />
       <div className={cls.posts}>
-        <MyPostsContainer store={store}/>
+        <MyPostsContainer />
       </div>
     </main>
   );

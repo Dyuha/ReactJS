@@ -4,29 +4,24 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 
 const Dialogs = (props) => {
+  const dialogsData = props.messagesPage.dialogsData;
+  const messagesData = props.messagesPage.messagesData;
+  const newMessageText = props.messagesPage.newMessageText;
 
-  // const state = store.getState();
-  // const dialogsData = state.messagesPage.dialogsData;
-  // const messagesData = state.messagesPage.messagesData;
-  // const newMessageText = state.messagesPage.newMessageText;
-
-  const dialogsElements = props.dialogsData.map((dialog) => (
+  const dialogsElements = dialogsData.map((dialog) => (
     <DialogItem name={dialog.name} id={dialog.id} />
   ));
-  const messagesElements = props.messagesData.map((message) => (
+  const messagesElements = messagesData.map((message) => (
     <Message message={message.message || "empty message"} />
   ));
 
   const addMessage = () => {
     props.addMessage();
-    // store.dispatch(addMessageActionCreator());
   };
 
   const onMessageChange = (event) => {
     const text = event.target.value;
     props.updateNewMessageText(text);
-    // const action = updateNewMessageTextActionCreator(text);
-    // store.dispatch(action);
   };
 
   return (
@@ -39,7 +34,7 @@ const Dialogs = (props) => {
         rows="10"
         onChange={onMessageChange}
         placeholder="New Message"
-        value={props.newMessageText}
+        value={newMessageText}
       />
     </div>
   );

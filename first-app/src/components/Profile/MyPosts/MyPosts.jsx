@@ -3,24 +3,20 @@ import cls from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
 const MyPosts = (props) => {
-
-  const postData = props.posts;
-  const postElements = postData.map((post) => (
+  const postsData = props.profilePage.postsData;
+  
+  const postElements = postsData.map((post) => (
     <Post message={post.message} likes={post.likes} dislikes={post.dislikes} />
   ));
 
   const onAddPost = () => {
     props.addPost();
-    // props.dispatch(addPostActionCreator());
   };
 
   const onPostChange = (event) => {
     const text = event.target.value;
     props.updateNewPostText(text);
-    // const action = updateNewPostTextActionCreator(text);
-    // props.dispatch(action);
   };
-
 
   return (
     <div>
@@ -31,7 +27,7 @@ const MyPosts = (props) => {
             cols="60"
             rows="4"
             onChange={onPostChange}
-            value={props.newPostText}
+            value={props.profilePage.newPostText}
           />
         </div>
         <button onClick={onAddPost}>Add post</button>
