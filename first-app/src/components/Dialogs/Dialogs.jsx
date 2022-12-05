@@ -9,10 +9,10 @@ const Dialogs = (props) => {
   const newMessageText = props.messagesPage.newMessageText;
 
   const dialogsElements = dialogsData.map((dialog) => (
-    <DialogItem name={dialog.name} id={dialog.id} />
+    <DialogItem name={dialog.name} id={dialog.id} key={dialog.id} />
   ));
   const messagesElements = messagesData.map((message) => (
-    <Message message={message.message || "empty message"} />
+    <Message message={message.message || "empty message"} key={message.id} />
   ));
 
   const addMessage = () => {
