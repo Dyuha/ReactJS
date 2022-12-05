@@ -1,6 +1,5 @@
 import React from "react";
 import "./App.css";
-import Dialogs from "./components/Dialogs/Dialogs";
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
@@ -8,13 +7,9 @@ import { BrowserRouter as Router, Routes, Route, Navigate} from "react-router-do
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
-const App = ({states, dispatch}) => {
-  const dialogs = states.messagesPage.dialogsData;
-  const messages = states.messagesPage.messagesData;
-  const posts = states.profilePage.postsData;
-  const postText = states.profilePage.newPostText;
-  const newMessageText = states.messagesPage.newMessageText;
+const App = (props) => {
   return (
     <Router>
       <div className="app-wrapper">
@@ -23,12 +18,8 @@ const App = ({states, dispatch}) => {
         <div className="app-wrapper-content">
           <Routes>
             <Route path="" element={<Navigate to="/profile" />}/>
-            <Route path="/dialogs/*" element={<Dialogs dialogs={dialogs} 
-              messages={messages} 
-              newMessageText={newMessageText}
-              dispatch={dispatch}/>}/>
-            <Route path="/profile" element={<Profile posts={posts} postText={postText} 
-              dispatch={dispatch}/>}/>
+            <Route path="/dialogs/*" element={<DialogsContainer store={props.store}/>}/>
+            <Route path="/profile" element={<Profile store={props.store}/>}/>
             <Route path="/news" element={<News />}/>
             <Route path="/music" element={<Music />}/>
             <Route path="/settings" element={<Settings />}/>
