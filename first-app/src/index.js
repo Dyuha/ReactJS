@@ -8,8 +8,6 @@ import { Provider } from "react-redux";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-//костыли (пока что) ререндерим полностью наше дерево с новым state
-
 root.render(
   <React.StrictMode>
     <Provider store={store}>
