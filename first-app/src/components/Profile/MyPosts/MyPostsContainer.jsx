@@ -7,7 +7,8 @@ import { connect } from "react-redux";
 
 const mapStateToProps = (state) => {
   return {
-    profilePage: state.profilePage,
+    newPostText: state.profilePage.newPostText,
+    postsData: state.profilePage.postsData
   };
 };
 
@@ -15,7 +16,6 @@ const mapDispatchToProps = {
     updateNewPostText,
     addPost,
 };
-
 
 const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
 

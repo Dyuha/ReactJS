@@ -3,7 +3,7 @@ import cls from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
 const MyPosts = (props) => {
-  const postsData = props.profilePage.postsData;
+  const postsData = props.postsData;
 
   const postElements = postsData.map((post) => (
     <Post message={post.message} likes={post.likes} dislikes={post.dislikes} key={post.id} />
@@ -27,7 +27,7 @@ const MyPosts = (props) => {
             cols="60"
             rows="4"
             onChange={onPostChange}
-            value={props.profilePage.newPostText}
+            value={props.newPostText}
           />
         </div>
         <button onClick={onAddPost}>Add post</button>

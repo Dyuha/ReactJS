@@ -4,5 +4,10 @@
 }
 
 .description {
+  display: flex;
   padding: 10px;
+}
+
+.mainInfo {
+  padding-left: 10px;
 }
