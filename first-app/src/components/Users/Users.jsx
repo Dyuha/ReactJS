@@ -1,27 +1,29 @@
 import React from "react";
 import cls from "./Users.module.css";
 
-const imgDaffy = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1iylbd8JfQmIVDTCNoi_UzGcV6TKOfRT7nw&usqp=CAU"
 
+const imgDaffy =
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1iylbd8JfQmIVDTCNoi_UzGcV6TKOfRT7nw&usqp=CAU";
 
 const Users = (props) => {
+  const pageCount = Math.ceil(props.totalUsersCount / props.pageSize);
+  const pages = [...Array(pageCount)].map((_, b) => (b += 1));
 
-    const pageCount = Math.ceil(props.totalUsersCount / props.pageSize);
-    const pages = [...Array(pageCount)].map((_, b) => b+=1)
-
-    return (
-        <div>
-          <div>
-            {pages.map(p => {
-                return (
-                  <span onClick={ () => props.onPageChange(p) } 
-                        className={props.currentPage === p && cls.selectedPage}>{p} </span>
-                )
-              })
-            }
-          </div>
-          
-          {props.users.map((u) => (
+  return (
+    <div>
+      <div>
+        {pages.map((p) => {
+          return (
+            <span
+              onClick={() => props.onPageChange(p)}
+              className={props.currentPage === p && cls.selectedPage}
+            >
+              {p}
+            </span>
+          );
+        })}
+      </div>
+      {props.users.map((u) => (
             <div key={u.id} className={cls.wrapper}>
                 <div>
                   <img src={u.photos.small || imgDaffy} alt="avatar" className={cls.userAva} />
@@ -37,8 +39,8 @@ const Users = (props) => {
                   <div>{"u.location.country"}</div>
             </div>
           ))}
-        </div>
-      );
+    </div>
+  );
 };
 
 export default Users;

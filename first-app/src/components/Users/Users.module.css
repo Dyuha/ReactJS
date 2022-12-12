@@ -10,3 +10,7 @@
 .selectedPage {
     font-weight: bold;
 }
+
+span:hover {
+    cursor: pointer;
+}
