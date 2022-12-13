@@ -4,6 +4,7 @@ import cls from "./Profile.module.css";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 const Profile = ({profile}) => {
+
   return (
     <main>
       <ProfileInfo profile={profile}/>
@@ -13,5 +14,5 @@ const Profile = ({profile}) => {
     </main>
   );
 };
-
+ 
 export default Profile;
