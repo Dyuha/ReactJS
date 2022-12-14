@@ -4,6 +4,7 @@ const SET_USERS = "SET_USERS";
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT";
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
+const TOGGLE_IS_FOLLOWING = "TOGGLE_IS_FOLLOWING";
 
 const initialState = {
   users: [],
@@ -11,6 +12,7 @@ const initialState = {
   totalUsersCount: 0,
   currentPage: 1,
   isFetching: true,
+  isFollowing: [],
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -42,7 +44,12 @@ const usersReducer = (state = initialState, action) => {
     case SET_TOTAL_USERS_COUNT:
       return {...state, totalUsersCount: action.totalUsersCount} ;
     case TOGGLE_IS_FETCHING:
-      return { ...state, isFetching: action.isFetching };   
+      return {...state, isFetching: action.isFetching};
+    case TOGGLE_IS_FOLLOWING:
+      return {...state, 
+              isFollowing: action.isFollowing 
+              ?[...state.isFollowing, action.userID] 
+              :state.isFollowing.filter(id => id !== action.userID)};    
     default:
       return state;
   }
@@ -51,8 +58,9 @@ const usersReducer = (state = initialState, action) => {
 export const follow = (userID) => ({ type: FOLLOW, userID });
 export const unfollow = (userID) => ({ type: UNFOLLOW, userID });
 export const setUsers = (users) => ({ type: SET_USERS, users });
-export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage })
-export const setTotalUsersCount = (totalUsersCount) => ({ type: SET_TOTAL_USERS_COUNT, totalUsersCount })
-export const setIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching })
+export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage });
+export const setTotalUsersCount = (totalUsersCount) => ({ type: SET_TOTAL_USERS_COUNT, totalUsersCount });
+export const setIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
+export const setIsFollowing = (isFollowing, userID) => ({ type: TOGGLE_IS_FOLLOWING, isFollowing, userID });
 
 export default usersReducer;

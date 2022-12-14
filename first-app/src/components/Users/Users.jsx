@@ -32,26 +32,30 @@ const Users = (props) => {
                 </div>
                 <div>
                 {u.followed 
-                  ? <button onClick={ () => { usersAPI.unfollowUser(u.id)
+                  ? <button onClick={ () => { props.setIsFollowing(true, u.id);
+                                              usersAPI.unfollowUser(u.id)
                                                 .then((data) => {
                                                   if (data.resultCode === 0){
                                                       props.unfollow(u.id) 
                                                   }
+                                                  props.setIsFollowing(false, u.id);
                                                 })
                                                 .catch(error => {
                                                   console.log(error)
                                                 })
-                                            } }>UNFOLLOW</button> 
-                  : <button onClick={ () => { usersAPI.followUser(u.id)
+                                            } } disabled={props.isFollowing.some(id => id === u.id)} >UNFOLLOW</button> 
+                  : <button onClick={ () => { props.setIsFollowing(true, u.id);
+                                              usersAPI.followUser(u.id)
                                                 .then((data) => {
                                                   if (data.resultCode === 0){
                                                       props.follow(u.id); 
                                                   }
+                                                  props.setIsFollowing(false, u.id);
                                                 })
                                                 .catch(error => {
                                                   console.log(error)
                                                 })
-                                            } }>FOLLOW</button>}
+                                            } } disabled={props.isFollowing.some(id => id === u.id)} >FOLLOW</button>}
                 </div>
                   <div>{u.name}</div>
                   <div>{u.status}</div>
