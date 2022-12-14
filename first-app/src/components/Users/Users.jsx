@@ -1,7 +1,6 @@
 import React from "react";
 import cls from "./Users.module.css";
 import NavLink from "./../NavLink_V5/NavLink"
-import { usersAPI } from "../../API/API";
 
 const imgDaffy =
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1iylbd8JfQmIVDTCNoi_UzGcV6TKOfRT7nw&usqp=CAU";
@@ -32,30 +31,9 @@ const Users = (props) => {
                 </div>
                 <div>
                 {u.followed 
-                  ? <button onClick={ () => { props.setIsFollowing(true, u.id);
-                                              usersAPI.unfollowUser(u.id)
-                                                .then((data) => {
-                                                  if (data.resultCode === 0){
-                                                      props.unfollow(u.id) 
-                                                  }
-                                                  props.setIsFollowing(false, u.id);
-                                                })
-                                                .catch(error => {
-                                                  console.log(error)
-                                                })
-                                            } } disabled={props.isFollowing.some(id => id === u.id)} >UNFOLLOW</button> 
-                  : <button onClick={ () => { props.setIsFollowing(true, u.id);
-                                              usersAPI.followUser(u.id)
-                                                .then((data) => {
-                                                  if (data.resultCode === 0){
-                                                      props.follow(u.id); 
-                                                  }
-                                                  props.setIsFollowing(false, u.id);
-                                                })
-                                                .catch(error => {
-                                                  console.log(error)
-                                                })
-                                            } } disabled={props.isFollowing.some(id => id === u.id)} >FOLLOW</button>}
+                  ? <button onClick={ () => { props.unfollow(u.id) } } disabled={props.isFollowing.some(id => id === u.id)} >UNFOLLOW</button> 
+                  : <button onClick={ () => { props.follow(u.id) } } disabled={props.isFollowing.some(id => id === u.id)} >FOLLOW</button>
+                }
                 </div>
                   <div>{u.name}</div>
                   <div>{u.status}</div>

@@ -1,14 +1,9 @@
 import React from "react";
 import {
-  follow,
+  getUsers,
+  setNewCurrentPage,
   unfollow,
-  setUsers,
-  setCurrentPage,
-  setTotalUsersCount,
-  setIsFetching,
-  setIsFollowing,
-  getUsersThunkCreator,
-  setCurrentPageThunkCreator,
+  follow,
 } from "../../redux/usersReducer";
 import { connect } from "react-redux";
 import Users from "./Users";
@@ -18,11 +13,11 @@ import Preloader from "../../common/Preloader/Preloader";
 
 class UsersContainer extends React.Component {
   componentDidMount() {
-    this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize);
+    this.props.getUsers(this.props.currentPage, this.props.pageSize);
   };
   
   onPageChange = (page) => {
-    this.props.setCurrentPageThunkCreator(page, this.props.pageSize)
+    this.props.setNewCurrentPage(page, this.props.pageSize)
   };
 
   render() {
@@ -35,10 +30,9 @@ class UsersContainer extends React.Component {
           pageSize={this.props.pageSize}
           currentPage={this.props.currentPage}
           users={this.props.users}
+          isFollowing={this.props.isFollowing}
           unfollow={this.props.unfollow}
           follow={this.props.follow}
-          setIsFollowing={this.props.setIsFollowing}
-          isFollowing={this.props.isFollowing}
         />      
       </>
     );
@@ -57,15 +51,10 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  follow,
+  getUsers,
+  setNewCurrentPage,
   unfollow,
-  setUsers,
-  setCurrentPage,
-  setTotalUsersCount,
-  setIsFetching,
-  setIsFollowing,
-  getUsersThunkCreator,
-  setCurrentPageThunkCreator,
+  follow,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);

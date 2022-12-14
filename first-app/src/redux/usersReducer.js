@@ -56,15 +56,15 @@ const usersReducer = (state = initialState, action) => {
   }
 };
 
-export const follow = (userID) => ({ type: FOLLOW, userID });
-export const unfollow = (userID) => ({ type: UNFOLLOW, userID });
+export const acceptFollow = (userID) => ({ type: FOLLOW, userID });
+export const acceptUnfollow = (userID) => ({ type: UNFOLLOW, userID });
 export const setUsers = (users) => ({ type: SET_USERS, users });
 export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage });
 export const setTotalUsersCount = (totalUsersCount) => ({ type: SET_TOTAL_USERS_COUNT, totalUsersCount });
 export const setIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
 export const setIsFollowing = (isFollowing, userID) => ({ type: TOGGLE_IS_FOLLOWING, isFollowing, userID });
 
-export const getUsersThunkCreator = (currentPage, pageSize) =>{
+export const getUsers = (currentPage, pageSize) =>{
   return (dispatch) => {
     dispatch(setIsFetching(true));
       usersAPI.getUsers(currentPage, pageSize)
@@ -79,7 +79,7 @@ export const getUsersThunkCreator = (currentPage, pageSize) =>{
   }
 };   
 
-export const setCurrentPageThunkCreator = (page, pageSize) => {
+export const setNewCurrentPage = (page, pageSize) => {
   return (dispatch) => {
     dispatch(setCurrentPage(page));
     dispatch(setIsFetching(true));
@@ -94,4 +94,37 @@ export const setCurrentPageThunkCreator = (page, pageSize) => {
   }
 };
 
+export const unfollow = (userID) => {
+  return (dispatch) => {
+    dispatch(setIsFollowing(true, userID));
+    usersAPI.unfollowUser(userID)
+      .then((data) => {
+      if (data.resultCode === 0){
+        dispatch(acceptUnfollow(userID)); 
+      }
+        dispatch(setIsFollowing(false, userID));
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+};
+
+export const follow = (userID) => {
+  return (dispatch) => {
+    dispatch(setIsFollowing(true, userID));
+    usersAPI.followUser(userID)
+      .then((data) => {
+      if (data.resultCode === 0){
+        dispatch(acceptFollow(userID)); 
+      }
+        dispatch(setIsFollowing(false, userID));
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+};
+
 export default usersReducer;
+
