@@ -7,36 +7,22 @@ import {
   setTotalUsersCount,
   setIsFetching,
   setIsFollowing,
+  getUsersThunkCreator,
+  setCurrentPageThunkCreator,
 } from "../../redux/usersReducer";
 import { connect } from "react-redux";
 import Users from "./Users";
 import Preloader from "../../common/Preloader/Preloader";
-import { usersAPI } from "../../API/API";
+
+
 
 class UsersContainer extends React.Component {
   componentDidMount() {
-    this.props.setIsFetching(true);
-    usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-      .then((data) => {
-        this.props.setIsFetching(false);
-        this.props.setUsers(data.items);
-        this.props.setTotalUsersCount(data.totalCount);
-      })
-      .catch(error => {
-        console.log(error)
-      });
-  }
+    this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize);
+  };
+  
   onPageChange = (page) => {
-    this.props.setCurrentPage(page);
-    this.props.setIsFetching(true);
-    usersAPI.getUsers(page, this.props.pageSize)
-      .then((data) => {
-        this.props.setIsFetching(false);
-        this.props.setUsers(data.items);
-      })
-      .catch(error => {
-      console.log(error)
-      });
+    this.props.setCurrentPageThunkCreator(page, this.props.pageSize)
   };
 
   render() {
@@ -78,6 +64,8 @@ const mapDispatchToProps = {
   setTotalUsersCount,
   setIsFetching,
   setIsFollowing,
+  getUsersThunkCreator,
+  setCurrentPageThunkCreator,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
