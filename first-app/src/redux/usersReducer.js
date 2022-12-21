@@ -67,15 +67,15 @@ export const setIsFollowing = (isFollowing, userID) => ({ type: TOGGLE_IS_FOLLOW
 export const getUsers = (currentPage, pageSize) =>{
   return (dispatch) => {
     dispatch(setIsFetching(true));
-      usersAPI.getUsers(currentPage, pageSize)
-        .then((data) => {
-          dispatch(setIsFetching(false));
-          dispatch(setUsers(data.items));
-          dispatch(setTotalUsersCount(data.totalCount));
-        })
-        .catch(error => {
-          console.log(error)
-        });
+    usersAPI.getUsers(currentPage, pageSize)
+      .then((data) => {
+        dispatch(setIsFetching(false));
+        dispatch(setUsers(data.items));
+        dispatch(setTotalUsersCount(data.totalCount));
+      })
+      .catch(error => {
+        console.log(error)
+      });
   }
 };   
 
@@ -89,7 +89,7 @@ export const setNewCurrentPage = (page, pageSize) => {
         dispatch(setUsers(data.items));
       })
       .catch(error => {
-      console.log(error)
+        console.log(error)
       });
   }
 };

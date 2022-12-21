@@ -3,8 +3,8 @@ import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import cls from "./Profile.module.css";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
-const Profile = ({profile}) => {
 
+const Profile = ({profile}) => {
   return (
     <main>
       <ProfileInfo profile={profile}/>

@@ -8,6 +8,8 @@ import {
 import { connect } from "react-redux";
 import Users from "./Users";
 import Preloader from "../../common/Preloader/Preloader";
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import { compose } from 'redux';
 
 
 
@@ -57,4 +59,7 @@ const mapDispatchToProps = {
   follow,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withAuthRedirect
+)(UsersContainer);

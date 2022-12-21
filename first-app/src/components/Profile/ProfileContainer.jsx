@@ -2,15 +2,16 @@ import React from "react";
 import Profile from "./Profile";
 import { connect } from "react-redux";
 import { getUserProfile } from "../../redux/profileReducer";
-import { useParams } from "react-router-dom";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
+import { compose } from "redux";
+import withParams from "../../hoc/withParams";
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
     this.props.getUserProfile(this.props.params.userID);
   }
-
   render() {
-    return <Profile profile={this.props.profile} />;
+    return <Profile profile={this.props.profile} isAuth={this.props.isAuth} />;
   }
 }
 
@@ -21,8 +22,11 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  getUserProfile
+  getUserProfile,
 };
 
-const TakeParams = (props) => (<ProfileContainer {...props} params={useParams()} />);
-export default connect(mapStateToProps, mapDispatchToProps)(TakeParams);
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withParams,
+  withAuthRedirect
+)(ProfileContainer);
