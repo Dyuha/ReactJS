@@ -4,10 +4,10 @@ import cls from "./Profile.module.css";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 
-const Profile = ({profile}) => {
+const Profile = ({profile, status, updateStatus}) => {
   return (
     <main>
-      <ProfileInfo profile={profile}/>
+      <ProfileInfo profile={profile} status={status} updateStatus={updateStatus}/>
       <div className={cls.posts}>
         <MyPostsContainer />
       </div>

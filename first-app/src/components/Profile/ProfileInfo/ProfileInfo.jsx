@@ -1,11 +1,10 @@
 import React from "react";
 import cls from "./ProfileInfo.module.css";
 import Preloader from "./../../../common/Preloader/Preloader"
+import ProfileStatus from './ProfileStatus';
 
-const ava = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSMKr2niqS_dZSo3NV8hpAiAwbIYHv-ifZMsoIq-NTQdmkQiKJrCajLFB7cw_mcVojSr0&usqp=CAU";
 
-const ProfileInfo = ({profile}) => {
-
+const ProfileInfo = ({profile, status, updateStatus}) => {
   if(!profile) {
     return <Preloader />
   }
@@ -18,18 +17,7 @@ const ProfileInfo = ({profile}) => {
           alt="main_img"
         />
       </div>
-      <div className={cls.description}>
-        <div>
-          {<img src={profile.photos.large ? profile.photos.large : ava} alt="avatarka" className={cls.userAvatar}/>}
-        </div>
-        <div className={cls.mainInfo}>
-          <div>{`Name: ${profile.fullName}`}</div>
-          <div>{`Status: ${profile.aboutMe}`}</div>
-          <div>{`Looking for a job: ${profile.lookingForAJobDescription}`}</div>
-        </div>
-        
-      </div>
-      
+      <ProfileStatus profile={profile} status={status} updateStatus={updateStatus}/>
     </div>
   );
 };
