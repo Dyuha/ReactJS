@@ -1,6 +1,5 @@
 import  { usersAPI, profileAPI }  from '../API/API';
 const ADD_POST = "ADD-POST";
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_STATUS = "SET_STATUS";
 
@@ -19,7 +18,6 @@ const initialState = {
     { id: 6, message: "Kak dela?" },
     { id: 7, message: "Kak dela?" },
   ],
-  newPostText: "Some Post Text!!!",
   profile: null,
   status: "",
 };
@@ -29,22 +27,15 @@ const profileReducer = (state = initialState, action) => {
     case ADD_POST:{
       const newPost = {
         id: 8,
-        message: state.newPostText,
+        message: action.newPostBody,
         likes: 1,
         dislikes: -10,
       };
       return {
         ...state,
         postsData: [...state.postsData, newPost],
-        newPostText: '',
       };
     }  
-    case UPDATE_NEW_POST_TEXT:{
-      return {
-        ...state,
-        newPostText: action.postMessage,
-      };
-    }
     case SET_USER_PROFILE: {
       return {
         ...state, profile: action.profile
@@ -60,8 +51,7 @@ const profileReducer = (state = initialState, action) => {
   }
 };
 
-export const addPost = () => ({ type: ADD_POST });
-export const updateNewPostText = (text) => ({ type: UPDATE_NEW_POST_TEXT, postMessage: text });
+export const addPost = (newPostBody) => ({ type: ADD_POST, newPostBody });
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile });
 export const setStatus = (status) => ({ type: SET_STATUS, status });
 
@@ -102,6 +92,6 @@ export const updateStatus = (status) => {
         console.log(error)
       })
   }
-}
+};
 
 export default profileReducer;

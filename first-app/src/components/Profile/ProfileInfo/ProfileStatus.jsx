@@ -35,6 +35,10 @@ class ProfileStatus extends React.Component {
     debugger
   }
 
+  componentDidUpdate() {
+    console.log('update')
+  }
+
   render () {
     return (
       <div className={cls.description}>
