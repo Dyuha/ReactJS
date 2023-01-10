@@ -21,15 +21,28 @@ export const usersAPI = {
       .post(`follow/${userID}`)
       .then(response => response.data);
   },
+  getUserProfile(userID){
+    console.warn('Obsolete method. Please use profileAPI method')
+    return profileAPI.getUserProfile(userID);
+  },
+};
+
+export const authAPI = {
   getAuth(){
     return instance
       .get(`auth/me`)
       .then(response => response.data);
   },
-  getUserProfile(userID){
-    console.warn('Obsolete method. Please use profileAPI method')
-    return profileAPI.getUserProfile(userID);
+  login(email, password, rememberMe=false){
+    return instance
+      .post(`/auth/login`, { email, password, rememberMe })
+      .then(response => response.data);
   },
+  logout(){
+    return instance
+      .delete(`/auth/login`)
+      .then(response => response.data);
+  }
 };
 
 export const profileAPI = {
