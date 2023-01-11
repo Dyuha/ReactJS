@@ -1,4 +1,4 @@
-import { createSelector } from "reselect"
+import { createSelector } from "reselect";
  
 export const getUsersSelector = (state) => {
   return state.usersPage.users
@@ -24,4 +24,6 @@ export const getIsFollowing = (state) => {
   return state.usersPage.isFollowing
 };
 
-export const superPuperHardSelector = createSelector() 
+export const superPuperHardSelector = createSelector( getUsersSelector, (users) => {
+  return users.filter( u => true );
+}) 
