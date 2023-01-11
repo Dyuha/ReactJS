@@ -5,6 +5,7 @@ import { requiredField, maxLengthCreator } from '../../utils/validators/validato
 import { connect } from 'react-redux';
 import { login } from "../../redux/authReducer";
 import { Navigate } from 'react-router-dom';
+import cls from "./../../common/FormsControll/FormsControll.module.css"
 
 const maxLength = maxLengthCreator(30);
 
@@ -20,6 +21,9 @@ const LoginForm = (props) => {
         <div>
           <Field type={"checkbox"} name={"rememberMe"} component={Input} /> remember me
         </div>
+        <div className={cls.formSummaryError}>
+            {props.error}
+        </div>
         <div>
           <button>login</button>
         </div>
@@ -30,6 +34,7 @@ const LoginForm = (props) => {
 const LoginReduxForm = reduxForm({form: 'login'})(LoginForm);
 
 const Login = (props) => {
+  //переписать на класс, сделать компонент дидмоунт как в апп
   const onSubmit = (formData) => {
     props.login(formData.email, formData.password, formData.rememberMe)
   } 
