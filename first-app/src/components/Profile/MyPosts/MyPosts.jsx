@@ -5,15 +5,13 @@ import { Field, reduxForm } from 'redux-form';
 import { maxLengthCreator, requiredField } from '../../../utils/validators/validators';
 import { Textarea } from "../../../common/FormsControll/FormsControll";
 
-const MyPosts = (props) => {
-  const postsData = props.postsData;
-
+const MyPosts = ({postsData, addPost}) => {
   const postElements = postsData.map((post) => (
     <Post message={post.message} likes={post.likes} dislikes={post.dislikes} key={post.id} />
   ));
 
   const onAddPost = (values) => {
-    props.addPost(values.newPostBody);
+    addPost(values.newPostBody);
   };
 
   return (
