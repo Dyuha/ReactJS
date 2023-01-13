@@ -26,4 +26,4 @@ export const getIsFollowing = (state) => {
 
 export const superPuperHardSelector = createSelector( getUsersSelector, (users) => {
   return users.filter( u => true );
-}) 
+});
