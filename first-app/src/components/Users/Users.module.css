@@ -14,3 +14,8 @@
 span:hover {
     cursor: pointer;
 }
+
+.paginatorWrapper {
+    display: flex;
+    justify-content: center;
+}
