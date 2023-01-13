@@ -13,6 +13,7 @@ import Login from "./components/Login/Login";
 import { connect } from 'react-redux';
 import { initializeApp } from "./redux/appReducer";
 import Preloader from "./common/Preloader/Preloader";
+//const DialogsContainer = React.lazy( () => import("./components/Dialogs/DialogsContainer") );
 
 class App extends React.Component {
   componentDidMount() {
