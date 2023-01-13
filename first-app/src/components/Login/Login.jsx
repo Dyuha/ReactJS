@@ -1,28 +1,23 @@
 import React from "react";
-import { Field, reduxForm } from "redux-form";
+import { reduxForm } from "redux-form";
 import { Input } from "../../common/FormsControll/FormsControll";
 import { requiredField, maxLengthCreator } from '../../utils/validators/validators';
 import { connect } from 'react-redux';
 import { login } from "../../redux/authReducer";
 import { Navigate } from 'react-router-dom';
 import cls from "./../../common/FormsControll/FormsControll.module.css"
+import { fieldCreator } from "../../common/FormsControll/FormsControll";
 
 const maxLength = maxLengthCreator(30);
 
-const LoginForm = (props) => {
+const LoginForm = ({handleSubmit, error}) => {
   return (
-      <form onSubmit={props.handleSubmit}>
-        <div>
-          <Field placeholder={"Email"} name={"email"} component={Input} validate={[requiredField, maxLength]} />
-        </div>
-        <div>
-          <Field placeholder={"Password"} name={"password"} type={"password"} component={Input} validate={[requiredField, maxLength]}/>
-        </div>
-        <div>
-          <Field type={"checkbox"} name={"rememberMe"} component={Input} /> remember me
-        </div>
+      <form onSubmit={handleSubmit}>
+        {fieldCreator("Email", "email", Input, [requiredField, maxLength])}
+        {fieldCreator("Password", "password", Input, [requiredField, maxLength], {type: "password"})}
+        {fieldCreator(null, "rememberMe", Input, [], {type: "checkbox"}, "remember me")}
         <div className={cls.formSummaryError}>
-            {props.error}
+            {error}
         </div>
         <div>
           <button>login</button>
@@ -33,14 +28,15 @@ const LoginForm = (props) => {
 
 const LoginReduxForm = reduxForm({form: 'login'})(LoginForm);
 
-const Login = (props) => {
+const Login = ({login, isAuth, userID}) => {
   //переписать на класс, сделать компонент дидмоунт как в апп
   const onSubmit = (formData) => {
-    props.login(formData.email, formData.password, formData.rememberMe)
+    login(formData.email, formData.password, formData.rememberMe)
   } 
 
-  if (props.isAuth && props.userID !== null){
-    return  <Navigate to={`/profile/${props.userID}`}/>
+  if (isAuth && userID !== null){
+    //трабл здеся
+    return  <Navigate to={`/profile/${userID}`}/>
   }
 
   return (

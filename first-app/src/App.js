@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
-import { BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
+import { Routes, Route, Navigate} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
@@ -26,7 +26,6 @@ class App extends React.Component {
     }
     
     return(
-    <Router>
       <div className="app-wrapper">
         <HeaderContainer />
         <Navbar />
@@ -43,7 +42,6 @@ class App extends React.Component {
           </Routes>
         </div>
       </div>
-    </Router>
     )
   }
 };

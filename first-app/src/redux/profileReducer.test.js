@@ -22,7 +22,6 @@ test('profileReducer test adding new posts', () => {
   const action = addPost("hello first test")
   // 2. action
   const newState = profileReducer(initialState, action);
-
   // 3. expectation
   expect(newState.postsData[7].message).toBe("hello first test");
 
@@ -33,7 +32,6 @@ test('delete post', () => {
   const action = deletePost(1)
   // 2. action
   const newState = profileReducer(initialState, action);
-
   // 3. expectation
   expect(newState.postsData.length).toBe(6);
 

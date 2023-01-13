@@ -1,10 +1,11 @@
 import cls from "./FormsControll.module.css"
+import { Field } from 'redux-form';
 
-const FormControl = ({input, meta, children, ...props}) => {
+const FormControl = ({meta: {touched, error}, children}) => {
   return(
-    <div className={cls.formControl + " " + (meta.touched && meta.error ? cls.error : "")}>
+    <div className={cls.formControl + " " + (touched && error ? cls.error : "")}>
       {children}
-      {meta.touched && meta.error ? <span>{meta.error}</span> : undefined}
+      {touched && error ? <span>{error}</span> : undefined}
     </div>
   )  
 }
@@ -17,3 +18,15 @@ export const Input = (props) => {
   return <FormControl {...props} ><input {...props.input} {...props}/></FormControl>
 };
 
+export const fieldCreator = (placeholder, name, component, validators, props={}, text="") => (
+  <div>
+    <Field
+      placeholder={placeholder}
+      name={name}
+      component={component}
+      validate={validators}
+      {...props}
+    />
+    {text}
+  </div>
+);
