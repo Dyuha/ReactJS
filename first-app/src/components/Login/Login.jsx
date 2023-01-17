@@ -10,12 +10,14 @@ import { fieldCreator } from "../../common/FormsControll/FormsControll";
 
 const maxLength = maxLengthCreator(30);
 
-const LoginForm = ({handleSubmit, error}) => {
+const LoginForm = ({handleSubmit, error, captchaUrl}) => {
   return (
       <form onSubmit={handleSubmit}>
         {fieldCreator("Email", "email", Input, [requiredField, maxLength])}
         {fieldCreator("Password", "password", Input, [requiredField, maxLength], {type: "password"})}
         {fieldCreator(null, "rememberMe", Input, [], {type: "checkbox"}, "remember me")}
+        {captchaUrl && <img src={captchaUrl} alt="captcha"/>}
+        {captchaUrl && fieldCreator("Captcha text", "captcha", Input, [requiredField])}
         <div className={cls.formSummaryError}>
             {error}
         </div>
@@ -28,10 +30,10 @@ const LoginForm = ({handleSubmit, error}) => {
 
 const LoginReduxForm = reduxForm({form: 'login'})(LoginForm);
 
-const Login = ({login, isAuth, userID}) => {
+const Login = ({login, isAuth, userID, captchaUrl}) => {
   //переписать на класс, сделать компонент дидмоунт как в апп
   const onSubmit = (formData) => {
-    login(formData.email, formData.password, formData.rememberMe)
+    login(formData.email, formData.password, formData.rememberMe, formData.captcha)
   } 
 
   if (isAuth && userID !== null){
@@ -39,10 +41,12 @@ const Login = ({login, isAuth, userID}) => {
     return  <Navigate to={`/profile/${userID}`}/>
   }
 
+
+
   return (
     <div> 
       <h1>LOGIN</h1>
-      <LoginReduxForm onSubmit={onSubmit}/>
+      <LoginReduxForm captchaUrl={captchaUrl} onSubmit={onSubmit}/>
     </div>
   );
 };
@@ -55,6 +59,7 @@ const mapStateToProps = (state) => {
   return {
     isAuth: state.auth.isAuth,
     userID: state.auth.userID,
+    captchaUrl: state.auth.captchaUrl,
   };
 }
 

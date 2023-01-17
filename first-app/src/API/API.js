@@ -33,9 +33,9 @@ export const authAPI = {
       .get(`auth/me`)
       .then(response => response.data);
   },
-  login(email, password, rememberMe=false){
+  login(email, password, rememberMe=false, captcha){
     return instance
-      .post(`/auth/login`, { email, password, rememberMe })
+      .post(`/auth/login`, { email, password, rememberMe, captcha})
       .then(response => response.data);
   },
   logout(){
@@ -61,4 +61,19 @@ export const profileAPI = {
       .put(`profile/status`, {status: status})
       .then(response => response.data)
   },
+  savePhoto(photo){
+    const formData = new FormData();
+    formData.append("image", photo);
+    return instance
+      .put(`profile/photo`, formData, {headers: {'Content-Type': 'multipart/form-data'}})
+      .then(response => response.data)
+  }
 };
+
+export const securityAPI = {
+  getCaptchaUrl() {
+    return instance
+    .get(`security/get-captcha-url`)
+    .then(response => response.data)
+  }
+}

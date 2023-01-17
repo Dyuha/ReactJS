@@ -15,7 +15,9 @@ const ProfileStatusHooks = (props) => {
   }, [props.status]);
 
   const activateEditMode = () => {
-    setEditMode(true);
+    if (props.isOwner){
+      setEditMode(true);
+    }
   }
 
   const deactivateEditMode = () => {
@@ -27,16 +29,19 @@ const ProfileStatusHooks = (props) => {
     setStatus(e.currentTarget.value)
   }
 
+  const onMainPhotoSelected = (e) => {
+    if (e.target.files.length){
+      props.savePhoto(e.target.files[0]);
+    } 
+  }
+
   return (
     <div className={cls.description}>
       <div>
-        {
-          <img
-            src={props.profile.photos.large ? props.profile.photos.large : ava}
-            alt="avatarka"
-            className={cls.userAvatar}
-          />
-        }
+          <img src={props.profile.photos.large || ava} alt="avatarka" className={cls.userAvatar}/>
+          <div>
+            {props.isOwner && <input type="file" onChange={onMainPhotoSelected}/>}
+          </div>
       </div>
       <div className={cls.mainInfo}>
         <div>{`Name: ${props.profile.fullName}`}</div>
@@ -46,7 +51,11 @@ const ProfileStatusHooks = (props) => {
             : <span onClick={ activateEditMode } >{`Status: ${props.status} `}</span>
           }            
         </div>
-        <div>{`Looking for a job: ${props.profile.lookingForAJobDescription}`}</div>
+        <div>{`Looking for a job: ${props.profile.lookingForAJobDescription ? props.profile.lookingForAJobDescription : "No"}`}</div>
+        {/* <div>{
+              Object.keys(props.profile.contacts).map(key => <div><a href={props.profile.contacts[key]}>{props.profile.contacts[key] || "None"}</a></div>)
+            }
+        </div> */}
       </div>
     </div>
   );

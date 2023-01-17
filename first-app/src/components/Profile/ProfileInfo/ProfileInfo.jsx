@@ -4,7 +4,7 @@ import Preloader from "./../../../common/Preloader/Preloader"
 import ProfileStatusHooks from './ProfileStatusHooks';
 
 
-const ProfileInfo = ({profile, status, updateStatus}) => {
+const ProfileInfo = ({isOwner, profile, status, updateStatus, savePhoto}) => {
   if(!profile) {
     return <Preloader />
   }
@@ -17,7 +17,7 @@ const ProfileInfo = ({profile, status, updateStatus}) => {
           alt="main_img"
         />
       </div>
-      <ProfileStatusHooks profile={profile} status={status} updateStatus={updateStatus}/>
+      <ProfileStatusHooks isOwner={isOwner} profile={profile} status={status} updateStatus={updateStatus} savePhoto={savePhoto}/>
     </div>
   );
 };
