@@ -30,14 +30,13 @@ const LoginForm = ({handleSubmit, error, captchaUrl}) => {
 
 const LoginReduxForm = reduxForm({form: 'login'})(LoginForm);
 
-const Login = ({login, isAuth, userID, captchaUrl}) => {
-  //переписать на класс, сделать компонент дидмоунт как в апп
+const Login = ({login, isAuth, userID, captchaUrl, logoutIsFetching}) => {
+
   const onSubmit = (formData) => {
     login(formData.email, formData.password, formData.rememberMe, formData.captcha)
   } 
 
-  if (isAuth && userID !== null){
-    //трабл здеся
+  if (isAuth && userID !== null && !logoutIsFetching){
     return  <Navigate to={`/profile/${userID}`}/>
   }
 
@@ -60,6 +59,7 @@ const mapStateToProps = (state) => {
     isAuth: state.auth.isAuth,
     userID: state.auth.userID,
     captchaUrl: state.auth.captchaUrl,
+    logoutIsFetching: state.auth.logoutIsFetching,
   };
 }
 

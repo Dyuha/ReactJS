@@ -2,6 +2,7 @@ import { stopSubmit } from 'redux-form';
 import { authAPI, securityAPI } from '../API/API';
 const SET_USER_DATA = "auth/SET_USER_DATA";
 const GET_CAPTCHA_URL_SUCCESS = "auth/GET_CAPTCHA_URL_SUCCESS";
+const LOGOU_IS_FETCHING = "auth/LOGOU_IS_FETCHING";
 
 
 const initialState = {
@@ -10,6 +11,7 @@ const initialState = {
   login: null,
   isAuth: false,
   captchaUrl: null,
+  logoutIsFetching: false,
 };
 
 const authReducer = (state=initialState, action) => {
@@ -24,13 +26,19 @@ const authReducer = (state=initialState, action) => {
         ...state,
         captchaUrl: action.captchaUrl,
       }
+    case LOGOU_IS_FETCHING:
+      return {
+        ...state,
+        logoutIsFetching: action.logoutIsFetching,
+      }  
     default:
       return state;  
   }
 };
 
 export const setAuthUserData = (userID, email, login, isAuth, captchaUrl) => ({type: SET_USER_DATA, data:{ userID, email, login, isAuth, captchaUrl}});
-export const getCaptchaUrlSuccess = (captchaUrl) => ({type: GET_CAPTCHA_URL_SUCCESS, captchaUrl})
+export const getCaptchaUrlSuccess = (captchaUrl) => ({type: GET_CAPTCHA_URL_SUCCESS, captchaUrl});
+export const setLogoutFetching = (logoutIsFetching) => ({type: LOGOU_IS_FETCHING, logoutIsFetching});
 
 export const getAuth = () => async dispatch => {
   try {
@@ -61,9 +69,11 @@ export const login = (email, password, rememberMe, captcha) => async dispatch =>
 
 export const logout = () => async dispatch => {
   try {
+    dispatch(setLogoutFetching(true))
     const data = await authAPI.logout()
     if ( data.resultCode === 0 ){
       dispatch(setAuthUserData( null, null, null, false ))
+      dispatch(setLogoutFetching(false))
     }
   } catch(error) {
     console.log(error)
