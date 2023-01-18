@@ -11,7 +11,7 @@ const MyPosts = ({postsData, addPost}) => {
   ));
 
   const onAddPost = (values) => {
-    addPost(values.newPostBody);
+    addPost(values.newPostBody)
   };
 
   return (

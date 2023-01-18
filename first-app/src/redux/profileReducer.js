@@ -1,4 +1,5 @@
 import  { usersAPI, profileAPI }  from '../API/API';
+import { reset } from 'redux-form';
 const ADD_POST = "profile/ADD-POST";
 const SET_USER_PROFILE = "profile/SET_USER_PROFILE";
 const SET_STATUS = "profile/SET_STATUS";
@@ -63,11 +64,16 @@ const profileReducer = (state = initialState, action) => {
   }
 };
 
-export const addPost = (newPostBody) => ({ type: ADD_POST, newPostBody });
+export const setPost = (newPostBody) => ({ type: ADD_POST, newPostBody });
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile });
 export const setStatus = (status) => ({ type: SET_STATUS, status });
 export const deletePost = (postID) => ({ type: DELETE_POST, postID });
 export const savePhotoSuccess = (photos) => ({type: SAVE_PHOTO_SUCCESS, photos})
+
+export const addPost = (newPostBody) => dispatch => {
+  dispatch(setPost(newPostBody));
+  dispatch(reset("newPostForm"));
+}
 
 export const getUserProfile = (userID) => async dispatch => {
   try {

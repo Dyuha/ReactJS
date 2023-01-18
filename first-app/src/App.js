@@ -32,6 +32,7 @@ class App extends React.Component {
           <Navbar />
           <div className="app-wrapper-content">
             <Routes>
+              <Route path="/" element={<Navigate to="/profile" />} />
               <Route path="/profile/" element={<Navigate to="/login" />} />
               <Route path="/dialogs/*" element={<DialogsContainer />} />
               <Route path="/profile/:userID" element={<ProfileContainer />} />
