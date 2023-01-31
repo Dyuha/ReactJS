@@ -1,26 +1,24 @@
 import React from "react";
 import { AppBar, IconButton, Toolbar, Typography, Menu, MenuItem } from '@mui/material';
 import { AccountCircle } from '@mui/icons-material';
-import cls from "./Header.module.css";
+import { connect } from "react-redux";
+import { logout } from '../../redux/authReducer';
+// import cls from "./Header.module.css";
 import NavLink from "../NavLink_V5/NavLink";
 
 const Header = (props) => {
   
   const [anchorEl, setAnchorEl] = React.useState(null);
-
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
   const handleClose = () => {
     setAnchorEl(null);
   };
-
   const handleCloseProfile = () => {
     setAnchorEl(null);
     <NavLink to={'/profile'}/>
   }
-  
   const handleCloseLogout = () => {
     setAnchorEl(null);
     props.logout();
@@ -71,20 +69,21 @@ const Header = (props) => {
         </IconButton>
       </Toolbar>
     </AppBar>
-
-    // <div className={cls.header}>
-    //   <img
-    //     src="https://www.cartonionline.com/gif/CARTOON/warner%20bros/Daffy_duck.jpg"
-    //     alt="logo"
-    //   />
-    //   <div className={cls.loginBlock}>
-    //     { props.isAuth 
-    //         ? <NavLink to={'/profile'}>{props.login}<div><button onClick={props.logout} >LOGOUT</button></div></NavLink>
-    //         : <NavLink to={'/login'}>Login</NavLink>
-    //     }
-    //   </div>
-    // </div>
   );
 };
 
-export default Header;
+
+const mapStateToProps = (state) => {
+  return {
+    isAuth: state.auth.isAuth,
+    login: state.auth.login,
+    profile: state.profilePage.profile,
+  }
+};
+
+const mapDispatchToProps = {
+  logout,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
+

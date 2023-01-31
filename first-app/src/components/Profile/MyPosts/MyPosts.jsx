@@ -1,9 +1,11 @@
 import React from "react";
 import cls from "./MyPosts.module.css";
 import Post from "./Post/Post";
+import { addPost } from "../../../redux/profileReducer";
 import { Field, reduxForm } from 'redux-form';
 import { maxLengthCreator, requiredField } from '../../../utils/validators/validators';
 import { Textarea } from "../../../common/FormsControll/FormsControll";
+import { connect } from 'react-redux';
 
 const MyPosts = ({postsData, addPost}) => {
   const postElements = postsData.map((post) => (
@@ -38,4 +40,14 @@ const NewPostForm = (props) => {
 
 const NewPostFormRedux = reduxForm({form: "newPostForm"})(NewPostForm)
 
-export default MyPosts;
+const mapStateToProps = (state) => {
+  return {
+    postsData: state.profilePage.postsData,
+  };
+};
+
+const mapDispatchToProps = {
+  addPost,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyPosts);

@@ -1,44 +1,37 @@
-import React from "react";
-import {
-  getUsers,
-  setNewCurrentPage,
-  unfollow,
-  follow,
-} from "../../redux/usersReducer";
+import React, { useEffect } from "react";
+import { getUsers, setNewCurrentPage, unfollow, follow } from "../../redux/usersReducer";
 import { connect } from "react-redux";
 import Users from "./Users";
 import Preloader from "../../common/Preloader/Preloader";
-import { withAuthRedirect } from '../../hoc/withAuthRedirect';
-import { compose } from 'redux';
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
+import { compose } from "redux";
 import { getPageSize, getTotalUsersCount, getCurrentPage, getIsFetching, getIsFollowing, getUsersSelector } from "../../redux/usersSelectors";
 
-
-class UsersContainer extends React.Component {
-  componentDidMount() {
-    this.props.getUsers(this.props.currentPage, this.props.pageSize);
-  };
+const UsersContainer = (props) => {
   
-  onPageChange = (page) => {
-    this.props.setNewCurrentPage(page, this.props.pageSize)
+  useEffect(() => {
+    props.getUsers(props.currentPage, props.pageSize);
+  }, []);
+
+  const onPageChange = (page) => {
+    props.setNewCurrentPage(page, props.pageSize);
   };
 
-  render() {
-    return (
-      <>
-        {this.props.isFetching ? <Preloader /> : null}
-        <Users
-          onPageChange={this.onPageChange}
-          totalUsersCount={this.props.totalUsersCount}
-          pageSize={this.props.pageSize}
-          currentPage={this.props.currentPage}
-          users={this.props.users}
-          isFollowing={this.props.isFollowing}
-          unfollow={this.props.unfollow}
-          follow={this.props.follow}
-        />      
-      </>
-    );
-  }
+  return (
+    <>
+      {props.isFetching ? <Preloader /> : null}
+      <Users
+        onPageChange={onPageChange}
+        totalUsersCount={props.totalUsersCount}
+        pageSize={props.pageSize}
+        currentPage={props.currentPage}
+        users={props.users}
+        isFollowing={props.isFollowing}
+        unfollow={props.unfollow}
+        follow={props.follow}
+      />
+    </>
+  );
 };
 
 const mapStateToProps = (state) => {
@@ -49,7 +42,7 @@ const mapStateToProps = (state) => {
     currentPage: getCurrentPage(state),
     isFetching: getIsFetching(state),
     isFollowing: getIsFollowing(state),
-  }
+  };
 };
 
 const mapDispatchToProps = {
