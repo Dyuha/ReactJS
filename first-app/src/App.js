@@ -27,8 +27,8 @@ class App extends React.Component {
 
     return (
       <Suspense fallback={<Preloader />}>
+        <HeaderContainer />
         <div className="app-wrapper">
-          <HeaderContainer />
           <Navbar />
           <div className="app-wrapper-content">
             <Routes>

@@ -5,7 +5,7 @@ import User from "./User";
 
 const Users = (props) => {
   return (
-    <div>
+    <div style={{marginTop:'10px'}}>
       <Paginator totalItemsCount={props.totalUsersCount}
                 pageSize={props.pageSize}
                 onPageChange={props.onPageChange}
