@@ -1,27 +1,27 @@
 import React from "react";
 import cls from "./Navbar.module.css";
-import NavLink from "../NavLink_V5/NavLink";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   return (
     <nav className={cls.navbar}>
       <div className={cls.item}>
-        <NavLink to="/profile" activeClassName={cls.active}>Profile</NavLink>
+        <NavLink to="/profile" className={({ isActive }) => isActive ? cls.active : ''}>Profile</NavLink>
       </div>
       <div className={cls.item}>
-        <NavLink to="/dialogs" activeClassName={cls.active}>Messages</NavLink>
+        <NavLink to="/dialogs" className={({ isActive }) => isActive ? cls.active : ''}>Messages</NavLink>
       </div>
       <div className={cls.item}>
-        <NavLink to="/users" activeClassName={cls.active}>Users</NavLink>
+        <NavLink to="/users" className={({ isActive }) => isActive ? cls.active : ''}>Users</NavLink>
       </div>
       <div className={cls.item}>
-        <NavLink to="/news" activeClassName={cls.active}>News</NavLink>
+        <NavLink to="/news" className={({ isActive }) => isActive ? cls.active : ''}>News</NavLink>
       </div>
       <div className={cls.item}>
-        <NavLink to="/music" activeClassName={cls.active}>Misuc</NavLink>
+        <NavLink to="/music" className={({ isActive }) => isActive ? cls.active : ''}>Misuc</NavLink>
       </div>
       <div className={cls.item}>
-        <NavLink to="/settings" activeClassName={cls.active}>Settings</NavLink>
+        <NavLink to="/settings" className={({ isActive }) => isActive ? cls.active : ''}>Settings</NavLink>
       </div>
     </nav>
   );

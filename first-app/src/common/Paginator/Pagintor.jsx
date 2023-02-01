@@ -18,7 +18,7 @@ const Paginator = ({totalItemsCount, pageSize, onPageChange, currentPage, portio
           <span>
             <button onClick={() => (setPortionNumber(portionNumber - 1))}>PREV</button> 
             <span onClick={() => {onPageChange(pages[0]);setPortionNumber(1)}} 
-                  className={currentPage === pages[0] && cls.selectedPage} >{pages[0]}...
+                  className={currentPage === pages[0] ? cls.selectedPage : ''} >{pages[0]}...
             </span>
           </span>
         }
@@ -26,10 +26,10 @@ const Paginator = ({totalItemsCount, pageSize, onPageChange, currentPage, portio
       {pages.filter( p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
         .map((p) => {
         return (
-          <div>
+          <div key={p}>
             <span
               onClick={() => onPageChange(p)}
-              className={currentPage === p && cls.selectedPage}>
+              className={currentPage === p ? cls.selectedPage : ''}>
               {p} 
             </span>
               { p && p < rightPortionPageNumber && p!== pageCount && <span>,</span> }
@@ -41,7 +41,7 @@ const Paginator = ({totalItemsCount, pageSize, onPageChange, currentPage, portio
         {portionCount > portionNumber && 
           <span>
             <span onClick={() => {onPageChange(pages[pageCount-1]);setPortionNumber(portionCount)}} 
-                  className={currentPage === pages[pageCount-1] && cls.selectedPage}>...{pages[pageCount-1]}
+                  className={currentPage === pages[pageCount-1] ? cls.selectedPage : ''}>...{pages[pageCount-1]}
             </span>
             <button onClick={() => (setPortionNumber(portionNumber + 1))}>NEXT</button>
           </span> 

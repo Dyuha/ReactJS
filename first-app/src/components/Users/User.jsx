@@ -8,7 +8,7 @@ const imgDaffy =
 const User = ({user, follow, unfollow, isFollowing}) => {
   return (
     <div>
-      <div key={user.id} className={cls.wrapper}>
+      <div className={cls.wrapper}>
         <div>
           <NavLink to={'/profile/'+user.id}>
             <img src={user.photos.small || imgDaffy} alt="avatar" className={cls.userAva} />

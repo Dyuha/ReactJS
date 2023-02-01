@@ -3,22 +3,21 @@ import { AppBar, IconButton, Toolbar, Typography, Menu, MenuItem } from '@mui/ma
 import { AccountCircle } from '@mui/icons-material';
 import { connect } from "react-redux";
 import { logout } from '../../redux/authReducer';
+import { NavLink } from "react-router-dom";
 // import cls from "./Header.module.css";
-import NavLink from "../NavLink_V5/NavLink";
 
 const Header = (props) => {
   
   const [anchorEl, setAnchorEl] = React.useState(null);
+  
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const handleCloseProfile = () => {
-    setAnchorEl(null);
-    <NavLink to={'/profile'}/>
-  }
+  
   const handleCloseLogout = () => {
     setAnchorEl(null);
     props.logout();
@@ -30,7 +29,7 @@ const Header = (props) => {
         <Typography>
           DAFFY Social
         </Typography>
-        <IconButton>
+        <div>
         {props.isAuth && (
             <div>
               <IconButton
@@ -58,15 +57,15 @@ const Header = (props) => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleCloseProfile}>
-                  <NavLink style={{textDecoration:'none', color:'black'}} to={'/profile'}>Profile
-                  </NavLink> 
+                <MenuItem onClick={handleClose}>
+                  <NavLink style={{textDecoration:'none', color:'black'}} 
+                           to={'/profile'}> Profile </NavLink> 
                 </MenuItem>
                 <MenuItem onClick={handleCloseLogout}>Logout</MenuItem>
               </Menu>
             </div>
           )}
-        </IconButton>
+        </div>
       </Toolbar>
     </AppBar>
   );
