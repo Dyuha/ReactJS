@@ -12,8 +12,8 @@ import { initializeApp } from "./redux/appReducer";
 import Preloader from "./common/Preloader/Preloader";
 import Header from "./components/Header/Header";
 import Profile from "./components/Profile/Profile";
-const DialogsContainer = React.lazy(() =>
-  import("./components/Dialogs/DialogsContainer")
+const Dialogs = React.lazy(() =>
+  import("./components/Dialogs/Dialogs")
 );
 
 const App = () => {
@@ -37,7 +37,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Navigate to="/profile" />} />
             <Route path="/profile/" element={<Navigate to="/login" />} />
-            <Route path="/dialogs/*" element={<DialogsContainer />} />
+            <Route path="/dialogs/*" element={<Dialogs />} />
             <Route path="/profile/:userID" element={<Profile />} />
             <Route path="/users" element={<Users />} />
             <Route path="/news" element={<News />} />

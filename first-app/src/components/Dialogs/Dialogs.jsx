@@ -5,10 +5,16 @@ import Message from "./Message/Message";
 import { Field, reduxForm } from "redux-form";
 import { Textarea } from "../../common/FormsControll/FormsControll";
 import { requiredField, maxLengthCreator } from "../../utils/validators/validators";
+import { useDispatch, useSelector } from 'react-redux';
+import { addMessage } from "../../redux/dialogsReducer";
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 
 const Dialogs = (props) => {
-  const dialogsData = props.messagesPage.dialogsData;
-  const messagesData = props.messagesPage.messagesData;
+
+  const dispatch = useDispatch();
+  const dialogsData = useSelector(state => state.messagesPage.dialogsData);
+  const messagesData = useSelector(state => state.messagesPage.messagesData);
+
   const dialogsElements = dialogsData.map((dialog) => (
     <DialogItem name={dialog.name} id={dialog.id} key={dialog.id} />
   ));
@@ -17,7 +23,7 @@ const Dialogs = (props) => {
   ));
 
   const addNewMessage = (values) => {
-    props.addMessage(values.newMessageBody);
+    dispatch(addMessage(values.newMessageBody));
   };
 
   return (
@@ -51,4 +57,4 @@ const AddMessageFormRedux = reduxForm({ form: "dialogAddMessageForm" })(
   AddMessageForm
 );
 
-export default Dialogs;
+export default withAuthRedirect(Dialogs);
