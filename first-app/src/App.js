@@ -21,8 +21,10 @@ const App = () => {
   }
   return (
     <Suspense fallback={<Preloader />}>
-      <Header />
-      <Content />
+     <div className="wrapper">
+       <Header />
+       <Content />
+    </div> 
     </Suspense>
   );
 };

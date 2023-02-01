@@ -16,3 +16,9 @@
 .loginBlock a {
   color: blanchedalmond;
 } */
+
+
+.header {
+  display: flex;
+  flex-direction: row-reverse;
+}

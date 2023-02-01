@@ -13,6 +13,25 @@ import {
 } from "../../redux/usersSelectors";
 import Preloader from '../../common/Preloader/Preloader';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import { Skeleton } from "antd";
+import cls from './Users.module.css'
+
+
+const SkeletonFetching = () => {
+  return (
+    <div className={cls.skeleton}>
+      <Skeleton active avatar paragraph={{ rows: 3 }} size={'small'} round={true} title={false}/>
+      <Skeleton active avatar paragraph={{ rows: 3 }} size={'small'} round={true} title={false}/>
+      <Skeleton active avatar paragraph={{ rows: 3 }} size={'small'} round={true} title={false}/>
+      <Skeleton active avatar paragraph={{ rows: 3 }} size={'small'} round={true} title={false}/>
+      <Skeleton active avatar paragraph={{ rows: 3 }} size={'small'} round={true} title={false}/>
+      <Skeleton active avatar paragraph={{ rows: 3 }} size={'small'} round={true} title={false}/>
+      <Skeleton active avatar paragraph={{ rows: 3 }} size={'small'} round={true} title={false}/>
+      <Skeleton active avatar paragraph={{ rows: 3 }} size={'small'} round={true} title={false}/>
+      <Skeleton active avatar paragraph={{ rows: 3 }} size={'small'} round={true} title={false}/>
+    </div>
+  )
+};
 
 
 const Users = (props) => {
@@ -51,7 +70,9 @@ const Users = (props) => {
 
   return (
     <div style={{marginTop:'10px'}}>
-      {isFetching ? <Preloader /> : null}
+      {isFetching 
+        ? <SkeletonFetching /> 
+        : ''}
       <Paginator totalItemsCount={totalUsersCount}
                  pageSize={pageSize}
                  onPageChange={onPageChange}

@@ -1,4 +1,4 @@
-import { FileOutlined, PieChartOutlined, UserOutlined, DesktopOutlined, TeamOutlined } from '@ant-design/icons';
+import { SettingOutlined, MessageOutlined, UserOutlined, TeamOutlined, AudioOutlined, FireOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import cls from "./Content.module.css";
@@ -14,12 +14,12 @@ function getItem(label, key, icon, children) {
 }
 
 const items = [
-  getItem('Profile', '/profile', <PieChartOutlined />),
-  getItem('Messages', '/dialogs', <DesktopOutlined />),
-  getItem('Users', '/users', <UserOutlined />),
-  getItem('News', '/news', <TeamOutlined />),
-  getItem('Misuc', '/music', <FileOutlined />),
-  getItem('Settings', '/settings', <FileOutlined />),
+  getItem('Profile', '/profile', <UserOutlined />),
+  getItem('Messages', '/dialogs', <MessageOutlined />),
+  getItem('Users', '/users', <TeamOutlined />),
+  getItem('News', '/news', <FireOutlined />),
+  getItem('Misuc', '/music', <AudioOutlined />),
+  getItem('Settings', '/settings', <SettingOutlined />),
 ];
 
 const Content = () => {

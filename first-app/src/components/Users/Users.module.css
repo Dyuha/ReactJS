@@ -19,3 +19,8 @@ span:hover {
     display: flex;
     justify-content: center;
 }
+
+.skeleton {
+    width: 300px;
+
+}
