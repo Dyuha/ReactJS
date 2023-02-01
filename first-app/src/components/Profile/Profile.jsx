@@ -41,6 +41,7 @@ const Profile = (props) => {
                    status={status} 
                    updateStatus={_updateStatus} 
                    savePhoto={_savePhoto}/>
+      <hr/>             
       <div className={cls.posts}>
         <MyPosts />
       </div>

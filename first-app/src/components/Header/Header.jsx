@@ -26,7 +26,7 @@ const Header = () => {
   };
 
   return (
-    <AppBar>
+    <AppBar >
       <Toolbar sx={{display:'flex', justifyContent:'space-between'}}>
         <Typography>
           DAFFY Social

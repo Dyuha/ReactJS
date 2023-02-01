@@ -1,0 +1,33 @@
+/* .sider {
+  overflow: auto;
+  /* height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0; */
+
+
+.menu {
+  max-width: 175px;
+  padding-top: 75px;
+  height: 100vh;
+  position: fixed;
+  
+}
+
+.menu_wrapper {
+  min-width: 175px;
+  height: 100vh;
+}
+
+.wrapper {
+  display: flex;
+}
+
+.main {
+  width:100%;
+  padding-top: 75px;
+  margin-left: 15%;
+  margin-right: 15%;
+  background-color: rgb(43, 185, 220);
+}
