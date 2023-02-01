@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import Paginator from "../../common/Paginator/Pagintor";
 import { getUsers, setNewCurrentPage, unfollow, follow } from "../../redux/usersReducer";
 import User from "./User";
@@ -41,20 +41,22 @@ const Users = (props) => {
     dispatch(unfollow(userID));
   };
 
+  const usersArray = useMemo( () => users.map( user => (
+    <User key={user.id}
+          user={user} 
+          follow={_follow} 
+          unfollow={_unfollow} 
+          isFollowing={isFollowing}>{ console.log('users') }</User> // eslint-disable-next-line 
+  )), [users])
+
   return (
     <div style={{marginTop:'10px'}}>
       {isFetching ? <Preloader /> : null}
       <Paginator totalItemsCount={totalUsersCount}
-                pageSize={pageSize}
-                onPageChange={onPageChange}
-                currentPage={currentPage}/>
-      {users.map( user => (
-        <User key={user.id}
-              user={user} 
-              follow={_follow} 
-              unfollow={_unfollow} 
-              isFollowing={isFollowing}/>
-      ))}
+                 pageSize={pageSize}
+                 onPageChange={onPageChange}
+                 currentPage={currentPage}/>
+      {usersArray}
     </div>
   );
 };

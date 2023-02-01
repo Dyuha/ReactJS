@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useMemo} from "react";
 import cls from "./MyPosts.module.css";
 import Post from "./Post/Post";
 import { addPost } from "../../../redux/profileReducer";
@@ -13,9 +13,9 @@ const MyPosts = () => {
   const postsData = useSelector(state => state.profilePage.postsData);
   const dispatch = useDispatch();
 
-  const postElements = postsData.map((post) => (
-    <Post message={post.message} likes={post.likes} dislikes={post.dislikes} key={post.id} />
-  ));
+  const postElements = useMemo( () => postsData.map((post) => (
+    <Post message={post.message} likes={post.likes} dislikes={post.dislikes} key={post.id}/>
+  )), [postsData]);
 
   const onAddPost = (values) => {
     dispatch(addPost(values.newPostBody))

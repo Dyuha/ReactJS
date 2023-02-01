@@ -1,15 +1,17 @@
 import React from "react";
 import { AppBar, IconButton, Toolbar, Typography, Menu, MenuItem } from '@mui/material';
 import { AccountCircle } from '@mui/icons-material';
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { logout } from '../../redux/authReducer';
 import { NavLink } from "react-router-dom";
 // import cls from "./Header.module.css";
 
-const Header = (props) => {
+const Header = () => {
   
   const [anchorEl, setAnchorEl] = React.useState(null);
-  
+  const isAuth = useSelector(state => state.auth.isAuth);
+  const dispatch = useDispatch();
+
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -20,7 +22,7 @@ const Header = (props) => {
   
   const handleCloseLogout = () => {
     setAnchorEl(null);
-    props.logout();
+    dispatch(logout());
   };
 
   return (
@@ -30,7 +32,7 @@ const Header = (props) => {
           DAFFY Social
         </Typography>
         <div>
-        {props.isAuth && (
+        {isAuth && (
             <div>
               <IconButton
                 size="large"
@@ -72,17 +74,18 @@ const Header = (props) => {
 };
 
 
-const mapStateToProps = (state) => {
-  return {
-    isAuth: state.auth.isAuth,
-    login: state.auth.login,
-    profile: state.profilePage.profile,
-  }
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     isAuth: state.auth.isAuth,
+//     login: state.auth.login,
+//     profile: state.profilePage.profile,
+//   }
+// };
 
-const mapDispatchToProps = {
-  logout,
-};
+// const mapDispatchToProps = {
+//   logout,
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;
+// connect(mapStateToProps, mapDispatchToProps)(Header);
 

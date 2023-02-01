@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import cls from "./Dialogs.module.css";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addMessage } from "../../redux/dialogsReducer";
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 
+
 const Dialogs = (props) => {
 
   const dispatch = useDispatch();
@@ -18,9 +19,10 @@ const Dialogs = (props) => {
   const dialogsElements = dialogsData.map((dialog) => (
     <DialogItem name={dialog.name} id={dialog.id} key={dialog.id} />
   ));
-  const messagesElements = messagesData.map((message) => (
-    <Message message={message.message || "empty message"} key={message.id} />
-  ));
+
+  const messagesElements = useMemo( () => messagesData.map((message) => (
+    <Message message={message.message} key={message.id}/>
+  )), [messagesData]);
 
   const addNewMessage = (values) => {
     dispatch(addMessage(values.newMessageBody));

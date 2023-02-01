@@ -30,13 +30,12 @@ const Paginator = ({totalItemsCount, pageSize, onPageChange, currentPage, portio
             <span
               onClick={() => onPageChange(p)}
               className={currentPage === p ? cls.selectedPage : ''}>
-              {p} 
+              {p}
             </span>
               { p && p < rightPortionPageNumber && p!== pageCount && <span>,</span> }
           </div>
-          
-        );
-      })}
+        )})
+      }
       <div>
         {portionCount > portionNumber && 
           <span>
