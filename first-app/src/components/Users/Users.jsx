@@ -46,7 +46,7 @@ const Users = (props) => {
           user={user} 
           follow={_follow} 
           unfollow={_unfollow} 
-          isFollowing={isFollowing}>{ console.log('users') }</User> // eslint-disable-next-line 
+          isFollowing={isFollowing} /> // eslint-disable-next-line 
   )), [users])
 
   return (

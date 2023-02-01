@@ -1,4 +1,4 @@
-import  { usersAPI, profileAPI }  from '../API/API';
+import  { profileAPI }  from '../API/API';
 import { reset } from 'redux-form';
 const ADD_POST = "profile/ADD-POST";
 const SET_USER_PROFILE = "profile/SET_USER_PROFILE";
@@ -77,7 +77,7 @@ export const addPost = (newPostBody) => dispatch => {
 
 export const getUserProfile = (userID) => async dispatch => {
   try {
-    const data = await usersAPI.getUserProfile(userID)
+    const data = await profileAPI.getUserProfile(userID)
     dispatch(setUserProfile(data));
   } catch(error) {
     console.log(error)
