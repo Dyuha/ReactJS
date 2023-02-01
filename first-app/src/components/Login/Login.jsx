@@ -2,11 +2,12 @@ import React from "react";
 import { reduxForm } from "redux-form";
 import { Input } from "../../common/FormsControll/FormsControll";
 import { requiredField, maxLengthCreator } from '../../utils/validators/validators';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { login } from "../../redux/authReducer";
 import { Navigate } from 'react-router-dom';
 import cls from "./../../common/FormsControll/FormsControll.module.css"
 import { fieldCreator } from "../../common/FormsControll/FormsControll";
+import { useDispatch } from 'react-redux';
 
 const maxLength = maxLengthCreator(30);
 
@@ -30,18 +31,22 @@ const LoginForm = ({handleSubmit, error, captchaUrl}) => {
 
 const LoginReduxForm = reduxForm({form: 'login'})(LoginForm);
 
-const Login = ({login, isAuth, userID, captchaUrl, logoutIsFetching}) => {
+
+const Login = () => {
+
+  const dispatch = useDispatch();
+  const isAuth = useSelector(state => state.auth.isAuth);
+  const userID = useSelector(state => state.auth.userID);
+  const captchaUrl = useSelector(state => state.auth.captchaUrl);
+  const logoutIsFetching = useSelector(state => state.auth.logoutIsFetching);
 
   const onSubmit = (formData) => {
-    login(formData.email, formData.password, formData.rememberMe, formData.captcha)
+    dispatch(login(formData.email, formData.password, formData.rememberMe, formData.captcha))
   } 
 
   if (isAuth && userID !== null && !logoutIsFetching){
     return  <Navigate to={`/profile/${userID}`}/>
   }
-
-
-
   return (
     <div> 
       <h1>LOGIN</h1>
@@ -50,17 +55,19 @@ const Login = ({login, isAuth, userID, captchaUrl, logoutIsFetching}) => {
   );
 };
 
-const mapDispatchToProps = {
-  login,
-}
+// const mapDispatchToProps = {
+//   login,
+// }
 
-const mapStateToProps = (state) => {
-  return {
-    isAuth: state.auth.isAuth,
-    userID: state.auth.userID,
-    captchaUrl: state.auth.captchaUrl,
-    logoutIsFetching: state.auth.logoutIsFetching,
-  };
-}
+// const mapStateToProps = (state) => {
+//   return {
+//     isAuth: state.auth.isAuth,
+//     userID: state.auth.userID,
+//     captchaUrl: state.auth.captchaUrl,
+//     logoutIsFetching: state.auth.logoutIsFetching,
+//   };
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+// export default connect(mapStateToProps, mapDispatchToProps)(Login);
+
+export default Login;

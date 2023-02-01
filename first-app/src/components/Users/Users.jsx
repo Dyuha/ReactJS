@@ -12,6 +12,7 @@ import {
   getUsersSelector,
 } from "../../redux/usersSelectors";
 import Preloader from '../../common/Preloader/Preloader';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 
 
 const Users = (props) => {
@@ -58,4 +59,4 @@ const Users = (props) => {
   );
 };
 
-export default Users;
+export default withAuthRedirect(Users);

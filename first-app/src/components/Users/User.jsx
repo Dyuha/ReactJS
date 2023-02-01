@@ -1,6 +1,7 @@
 import React from "react";
 import cls from "./Users.module.css";
-import NavLink from "../NavLink_V5/NavLink";
+import { NavLink } from 'react-router-dom';
+
 
 const imgDaffy =
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1iylbd8JfQmIVDTCNoi_UzGcV6TKOfRT7nw&usqp=CAU";
@@ -16,8 +17,8 @@ const User = ({user, follow, unfollow, isFollowing}) => {
         </div>
         <div>
         {user.followed 
-          ? <button onClick={ () => { unfollow(user.id) } } disabled={isFollowing.some(id => id === user.id)} >UNFOLLOW</button> 
-          : <button onClick={ () => { follow(user.id) } } disabled={isFollowing.some(id => id === user.id)} >FOLLOW</button>
+          ? <button onClick={ () => unfollow(user.id) } disabled={isFollowing.some(id => id === user.id)} >UNFOLLOW</button> 
+          : <button onClick={ () => follow(user.id) } disabled={isFollowing.some(id => id === user.id)} >FOLLOW</button>
         }
         </div>
           <div>{user.name}</div>

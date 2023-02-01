@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import MyPostsContainer from "./MyPosts/MyPosts";
+import MyPosts from "./MyPosts/MyPosts";
 import cls from "./Profile.module.css";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import { useParams } from 'react-router-dom';
@@ -42,7 +42,7 @@ const Profile = (props) => {
                    updateStatus={_updateStatus} 
                    savePhoto={_savePhoto}/>
       <div className={cls.posts}>
-        <MyPostsContainer />
+        <MyPosts />
       </div>
     </main>
   );
